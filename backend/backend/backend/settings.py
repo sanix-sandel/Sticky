@@ -57,8 +57,8 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_WHITELIST=(
-    'https://localhost:3000',
-    'https://localhost:8000'
+    'http://localhost:3000',
+    'http://localhost:8000'
 )
 
 ROOT_URLCONF = 'backend.urls'
