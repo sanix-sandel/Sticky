@@ -20,7 +20,7 @@ export const addNote=(note)=>{
     fetch(url, {
         method:'POST',
         headers:{
-            Accepting:'application/json',
+            Accept:'application/json',
             'Content-Type':'application/json'
         },
         body:JSON.stringify(note)

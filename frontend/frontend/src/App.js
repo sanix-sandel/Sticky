@@ -2,23 +2,11 @@ import React, {Component} from 'react';
 import {Button, Container, Row, Col} from 'reactstrap';
 
 import ListNotes from './components/ListNotes';
-import {fetchNotes, fetchNote, UpdateNote} from './api';
+import AddNoteForm from './components/AddNoteForm';
+import {fetchNotes, fetchNote, UpdateNote, addNote} from './api';
 /*Instead of using bind, arrow functions can be used */
 
-var notes_temp=[
-  {
-    'id':1,
-    'title':'Title is react note data',
-    'content':'This is the content'
-  },
-  {
-    'id':2,
-    'title':'My Second note',
-    'content':'And here is my second !'
-  }
 
-
-];
 
 class App extends Component {
   constructor(props){
@@ -33,6 +21,7 @@ class App extends Component {
     this.handleItemClick=this.handleItemClick.bind(this);
     this.handleAddNote=this.handleAddNote.bind(this)
     this.getData=this.getData.bind(this);
+    this.handleSaveNote=this.handleSaveNote.bind(this);
   }
   componentDidMount(){
     this.getData();
@@ -53,6 +42,14 @@ class App extends Component {
     this.setState((prevState)=>{
       return {is_creating:true}
     })
+  }
+
+  async handleSaveNote(data){
+    
+    await addNote(data);
+    
+    await this.getData();
+    
   }
 
   render(){
@@ -77,10 +74,10 @@ class App extends Component {
               </h5>
             </Col>
             <Col xs="8">
-              <p>Content/Editing here...</p>
+              
               {
                 this.state.is_creating ?
-                "creating now...":
+                <AddNoteForm handleSave={this.handleSaveNote}/>:
                 `Editing note with id: ${this.state.current_note_id}`
               }
             </Col>
