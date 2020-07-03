@@ -6,7 +6,7 @@ import AddNoteForm from './components/AddNoteForm';
 import {fetchNotes, fetchNote, UpdateNote, addNote} from './api';
 /*Instead of using bind, arrow functions can be used */
 import Websocket from 'react-websocket';
-import EditNoteForm from 'components/EditNoteForm.js';
+import EditNoteForm from './components/EditNoteForm.js';
 
 
 class App extends Component {
@@ -66,11 +66,11 @@ class App extends Component {
 
   handleOnChange(e){
     let content=e.target.value;
-    let current_note=this.state.note;
+    let current_note=this.state.notes;
     current_note.content=content;
 
     this.setState({
-      note:current_note
+      notes:current_note
     });
 
     const socket=this.refs.socket;
